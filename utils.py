@@ -21,6 +21,10 @@ def eval_folded_grid(sigma, theta_arr, cutoff=10000):
         total += np.exp(-((theta_arr - 2 * np.pi * n)**2) / (2 * sigma * sigma))
     return 1/(math.sqrt(2 * np.pi) * sigma) * total
 
+def wrapped_gaussian(dtheta, sigma, cutoff=1000):
+    cc,tt = np.meshgrid([x for x in range(-cutoff,cutoff+1)],dtheta)
+    return (1/np.sqrt(2*np.pi)/sigma)*np.sum(np.exp(-(tt-2*np.pi*cc)**2/2/sigma**2),axis=1)
+
 # Debug this later
 def get_J(points):
     points += [points[0]]
@@ -81,22 +85,20 @@ def get_coords_from_thetas(thetas, L):
     #given list of angles, get final x, y coordinates.
     
     #first ind is link location, second ind is samples
-#     if isinstance(thetas,list):
-#         print('list')
-#         if len(thetas[0])==1:
-#             thetas = np.array(thetas).reshape(-1,1)
-#         else:
-#             thetas = np.array(thetas)
+    if isinstance(thetas,list):
+        print('list')
+        if len(thetas[0])==1:
+            thetas = np.array(thetas).reshape(-1,1)
+        else:
+            thetas = np.array(thetas)
 
-#     print(thetas.shape)
-#     #first ind is link location, second is xy, third is samples
-#     points = np.zeros([thetas.shape[0]+1, 2, thetas.shape[1]])
-#     print(points.shape)
+    print(thetas.shape)
+    #first ind is link location, second is xy, third is samples
+    points = np.zeros([thetas.shape[0]+1, 2, thetas.shape[1]])
+    print(points.shape)
     
-#     for i in range(1,thetas.shape[0]+1):
-#         print(i, 'thetas_i', thetas[:i])
-#         points[i,0,:] = np.sum([L * np.cos(subset) for subset in np.cumsum(thetas[:i],axis=2)]) 
-#         points[i,1,:] = np.sum([L * np.sin(subset) for subset in np.cumsum(thetas[:i],axis=2)]) 
+    
+    
 
     theta_total = x_total = y_total = 0
     points = [[0, 0]]

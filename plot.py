@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 style_dict = {
     'analytical': 'r',
@@ -37,40 +37,3 @@ def plot_ceffs(sigma_min, sigma_max, num_pts, ceff_vals_lists, label_lists, fig_
 SIGMA_MIN=-3
 SIGMA_MAX=2
 NUM_PTS=10
-
-def eval_ceff(sigma, theta_0, n_links, method_name):
-    if method_name == 'analytical':
-        return analytical_ceff(sigma, n_links)
-    if method_name == 'infsig':
-        return analytical_inf_sigma(n_links)
-    if method_name == 'gaussian':
-        return gaussian_ceff(sigma, theta_0, n_links)
-    if method_name == 'Last Link 1':
-        return last_link_1(sigma, theta_0, n_links)
-    if method_name == 'Last Link 2' and n_links >= 4:
-        return last_link_2(sigma, theta_0, n_links)
-    if method_name == 'RNAMake' or method_name == 'naive':
-        return numerical_ceff(sigma, theta_0, n_links)
-    if method_name == 'mining minima':
-        return mining_minima(sigma, theta_0, n_links)
-    if method_name == 'grid1':
-        return grid_ceff(sigma, theta_0, n_links - 1, 1)
-    if method_name == 'grid2' and n_links >= 4:
-        return grid_ceff(sigma, theta_0, n_links - 2, 2)
-    if method_name == 'grid1 kde':
-        return grid_ceff_kde(sigma, theta_0, n_links - 1, 1)
-    if method_name == 'grid2 kde' and n_links >= 4:
-        return grid_ceff_kde(sigma, theta_0, n_links - 2, 2)
-    if method_name == 'SE(2) order 10':
-        return se2_ceff(sigma, theta_0, n_links)
-    print("Failed to evaluate method with these configurations")
-    return []
-
-def eval_ceff_range(sigma_min, sigma_max, num_pts, theta_0, n_links, method_name):
-    sigma_range = np.logspace(sigma_min, sigma_max, num_pts)
-   
-    ceff_vals = []
-    for sigma in sigma_range:
-        print(sigma)
-        ceff_vals += [eval_ceff(sigma, theta_0, n_links, method_name)]
-    return ceff_vals
