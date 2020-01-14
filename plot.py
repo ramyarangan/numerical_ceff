@@ -17,7 +17,7 @@ style_dict = {
     'naive': 'bo'
 }
 
-def plot_ceffs(sigma_min, sigma_max, num_pts, ceff_vals_lists, label_lists, fig_size=(8,5), cutoff=-100):
+def plot_ceffs(ceff_vals_lists, label_lists, fig_size=(8,5), cutoff=-100, sigma_min=-3, sigma_max=2, num_pts=10):
     sigma_range = np.logspace(sigma_min, sigma_max, num_pts)
     plt.figure(figsize=fig_size)
     for ii, ceff_list in enumerate(ceff_vals_lists):
@@ -32,8 +32,3 @@ def plot_ceffs(sigma_min, sigma_max, num_pts, ceff_vals_lists, label_lists, fig_
     plt.xscale('log')
     plt.yscale('log')
     plt.show()
-    
-## PLOTTING PARAMETERS
-SIGMA_MIN=-3
-SIGMA_MAX=2
-NUM_PTS=10
