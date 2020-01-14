@@ -7,7 +7,7 @@ from numpy import linalg as LA
 from itertools import product
 from utils import *
 from copy import copy
-from fast_histogram import histogram3d
+# from fast_histogram import histogram3d
 
 def naive_ceff(sigma, theta_0, n_links, L=1, niter=int(1e6), d_theta = 0.01, d_xy = 0.01):
     [theta_totals, x_totals, y_totals] = generate_for_samples(sigma, theta_0=theta_0, n_links=n_links, L=L, n_iter=niter)
@@ -40,7 +40,7 @@ def grid_ceff(sigma, theta_0, nfor, nrev, density_method='hist', L=1, niter=int(
     # plt.scatter(x_totals,y_totals)
     # plt.scatter(x_rev_totals,y_rev_totals)
 
-    if density_method=='slow_hist':
+    if density_method=='hist':
         
         # Define x, y, theta bin dimensions for histogram
         xmin = ymin = -2 * L
@@ -63,7 +63,7 @@ def grid_ceff(sigma, theta_0, nfor, nrev, density_method='hist', L=1, niter=int(
         
         product = np.sum(np.multiply(for_p_arr, rev_p_arr))*d_theta*d_xy*d_xy
 
-    elif density_method=='hist':
+    elif density_method=='fast_hist':
         # Define x, y, theta bin dimensions for histogram
         xmin = ymin = -2 * L
         xmax = ymax = 2 * L
