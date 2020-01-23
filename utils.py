@@ -111,7 +111,6 @@ def get_coords_from_thetas(thetas, L=1, prepend_origin=True):
 		y_coords = np.vstack([zero_prefix, y_coords])
 
 	points = np.swapaxes(np.array([x_coords,y_coords]),0,1)
-	
 	if points.shape[-1] == 1:
 		points = np.squeeze(points,axis=-1)
 

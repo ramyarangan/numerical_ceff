@@ -35,7 +35,7 @@ def se2_ceff(sigma, theta_0, n_links, L=1, cutoff=10, p_max=300, n_theta_points 
     # but it should really be n_p_points or something
 
     del_p = p_max / n_theta_points
-    P   = np.arange(0, p_max, del_p)    
+    P = np.arange(0, p_max, del_p)    
     m_n_range = 2*cutoff+1
     n_vals = np.arange(-cutoff, -cutoff+m_n_range)
     

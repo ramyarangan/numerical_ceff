@@ -38,8 +38,8 @@ def get_energy_from_first_thetas(first_thetas, sigma, point_n2, theta_0, L):
     n_links = len(first_thetas) + 3 # not used?
     
     # Get x, y positions from first_thetas
-    points = get_coords_from_thetas(first_thetas, L)
-        
+    points = get_coords_from_thetas(list(first_thetas), L)
+            
     # Get closure solutions and find the closure solution that is closest to the minimum
     [(x1, y1), (x2, y2)] = get_triangles(points[-1][0], points[-1][1], L)
     dist_1 = (point_n2[0] - x1[0])**2 + (point_n2[1] - y1[0])**2
@@ -63,13 +63,32 @@ def get_energy_from_first_thetas(first_thetas, sigma, point_n2, theta_0, L):
     
     return ene
 
+#HWS: vectorized but something here broke TODO come back to this
+# def get_energy_from_one_angle(theta, sigma, n_links, theta_0, L):
+#     if (n_links < 4):
+#         print("Cannot evaluate this function for n_links < 4")
+
+#     points = get_coords_from_thetas([theta*x for x in range(n_links)], L)
+    
+#     Z = eval_folded(sigma, theta - theta_0)**n_links
+#     J = get_J(points[-4:-1])
+#     if (Z <= 0) or (J <= 1e-06):
+#         return [np.nan, points[-3]]
+#     ene = -math.log(Z/J)
+#     return [ene, points[-3]]
+
 # Gets energy of the configuration with one angle specified (this angle is repeated to close the chain)
 # Returns the second-to-last points obtained by repeating the same angle n_links times
 def get_energy_from_one_angle(theta, sigma, n_links, theta_0, L):
     if (n_links < 4):
         print("Cannot evaluate this function for n_links < 4")
-
-    points = get_coords_from_thetas([theta]*n_links, L)
+    theta_total = x_total = y_total = 0
+    points = []
+    for ii in range(n_links):
+        theta_total = (theta_total + theta) % (2 * np.pi)
+        x_total += L * np.cos(theta_total)
+        y_total += L * np.sin(theta_total)
+        points += [np.array([x_total, y_total])]
     
     Z = eval_folded(sigma, theta - theta_0)**n_links
     J = get_J(points[-4:-1])

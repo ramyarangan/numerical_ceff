@@ -20,7 +20,7 @@ def naive_ceff(sigma, theta_0, n_links, L=1, niter=int(1e6), d_theta = 0.01, d_x
     ceff = 2 * np.pi * prob/(np.pi * d_theta * d_xy * d_xy)
     return ceff
 
-def grid_ceff(sigma, theta_0, nfor, nrev, density_method='hist', L=1, niter=int(1e6), d_theta = 0.01, d_xy = 0.01):
+def grid_ceff(sigma, theta_0, nfor, nrev, density_method='hist', L=1, niter=int(1e4), d_theta = 0.01, d_xy = 0.01):
     '''
     'density_method': 'hist' or 'kde'
     '''
@@ -163,7 +163,7 @@ def generate_last_two_samples(sigma, theta_0, nfor, L, niter):
     #     y_totals += L * np.sin(theta_totals)
     # return [theta_totals, x_totals, y_totals, x_prev, y_prev]
 
-def last_link_2(sigma, theta_0, n_links, L=1, niter=10000):
+def last_link_2(sigma, theta_0, n_links, L=1, niter=1000):
     if (n_links < 4):
         print("Cannot compute two last links' Ceff for nlinks less than 4")
         return -1        
