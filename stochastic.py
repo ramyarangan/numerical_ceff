@@ -98,9 +98,7 @@ def grid_ceff(sigma, theta_0, nfor, nrev, density_method='hist', L=1, niter=int(
 
     return 2 * np.pi * product
 
-def last_link_1(sigma, theta_0, n_links, L=1, niter=10000, num_bins=10000, d_r=0.01, d_theta=0.01):
-    del_theta = 2 * np.pi/num_bins 
-
+def last_link_1(sigma, theta_0, n_links, L=1, niter=10000, d_r=0.01, d_theta=0.01):
     theta_prod = np.ones(niter)
 
     # Sample first links

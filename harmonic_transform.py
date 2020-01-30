@@ -29,10 +29,7 @@ def get_rhohat_ps(theta_0, sigma, L, cutoff, n_links, p_range):
         rhohat_all[i_p] = final_entry
     return rhohat_all
 
-def se2_ceff(sigma, theta_0, n_links, L=1, cutoff=10, p_max=300, n_theta_points = 1500):
-    # n_theta_points POORLY named, is the number of p points. For now doing this
-    # to be consistent with other integration methods.
-    # but it should really be n_p_points or something
+def se2_ceff(sigma, theta_0, n_links, L=1, cutoff=10, p_max=300, n_p_points = 1500):
 
     del_p = p_max / n_theta_points
     P = np.arange(0, p_max, del_p)    

@@ -60,7 +60,7 @@ def eval_ceff(sigma, theta_0, n_links, method_name='naive', **kwargs):
     if method_name == 'grid2 kde' and n_links >= 4:
         return grid_ceff(sigma, theta_0, n_links - 2, 2, density_method='kde', **kwargs)
 
-    if method_name == 'SE(2) order 10':
+    if method_name == 'SE(2) order 10' or method_name == 'SE(2)':
         return se2_ceff(sigma, theta_0, n_links, **kwargs)
 
     print("Failed to evaluate method with these configurations")

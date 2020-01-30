@@ -14,7 +14,8 @@ style_dict = {
     'grid1 kde': 'bs',
     'grid2 kde': 'ms', 
     'SE(2) order 10': 'ko', 
-    'naive': 'bo'
+    'naive': 'bo',
+    'SE(2)': 'ko'
 }
 
 def plot_ceffs(ceff_vals_lists, label_lists, fig_size=(8,5), cutoff=-100, sigma_min=-3, sigma_max=2, num_pts=10):
